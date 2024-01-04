@@ -1,5 +1,4 @@
 {
-  "type": "commonjs",
   "scripts": {
     "lint": "./node_modules/.bin/eslint",
     "format": "prettier --write .",
