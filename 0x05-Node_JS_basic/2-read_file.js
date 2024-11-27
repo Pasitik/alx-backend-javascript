@@ -5,8 +5,12 @@ const countStudents = (path) => {
         const data = fs.readFileSync(path, 'utf-8')
         .split("\n")
         for(i=0; i < data.length; i++){
-            data[i] = data[i].split(',')
+            if (data[i] != ""){
+                data[i] = data[i].split(',')
+            }
         }
+        data.pop()
+        
         console.log(`Number of students:  ${data.length - 1}`)
 
         field = data[0].indexOf("field")
