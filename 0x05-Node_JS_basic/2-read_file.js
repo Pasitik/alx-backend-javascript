@@ -1,0 +1,43 @@
+const fs = require("fs")
+
+const countStudents = (path) => {
+    try{
+        const data = fs.readFileSync(path, 'utf-8')
+        .split("\n")
+        for(i=0; i < data.length; i++){
+            data[i] = data[i].split(',')
+        }
+        console.log(`Number of students:  ${data.length - 1}`)
+
+        field = data[0].indexOf("field")
+        arr = []
+        for(i=1; i<data.length; i++){
+            arr.push(data[i][field])
+        }
+        f_arr = new Set(arr)
+
+        fields = Object.assign(...Array.from(f_arr, v => ({[v]: []})))
+        
+        data.forEach(element => {
+            if (data.indexOf(element) != 0){
+                fields[element[field]].push(element[0])
+                //fields[element[field]]++
+            }
+        });
+
+        f_arr.forEach(element =>{
+            console.log(`Number of students in ${element}: ${fields[element].length}. ` +
+                `List:${fields[element].map((item)=>{
+                    item =  " " + item
+                    return item
+                })}`)
+        })
+
+    }catch (error){
+        throw new Error("Cannot load the database")
+    }
+}
+
+
+//countStudents("./database.csv")
+module.exports = countStudents;
