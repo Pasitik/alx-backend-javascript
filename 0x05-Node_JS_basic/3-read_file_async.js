@@ -36,7 +36,7 @@ const countStudents = async (path) => {
                     return item
                 })}`)
         })
-
+        return fields
     }catch (error){
         throw new Error("Cannot load the database")
     }
